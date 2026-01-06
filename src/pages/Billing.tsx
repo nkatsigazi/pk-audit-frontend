@@ -72,7 +72,7 @@ export default function Billing() {
         <div className="input-group mb-3">
           <input 
             type="text" 
-            placeholder="e.g. ENG-101" 
+            placeholder="e.g. 2" 
             value={engagementId} 
             onChange={e => setEngagementId(e.target.value)} 
             className="form-control" 

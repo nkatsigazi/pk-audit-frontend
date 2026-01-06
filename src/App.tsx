@@ -85,7 +85,7 @@ function ProtectedLayout() {
               <Link
                 key={item.path}
                 to={item.path}
-                className={`nav-link text-white py-2 rounded mb-1 ${
+                className={`nav-link text-white py-1 rounded mb-1 ${
                   location.pathname === item.path ? 'bg-secondary active' : 'hover-bg'
                 }`}
               >

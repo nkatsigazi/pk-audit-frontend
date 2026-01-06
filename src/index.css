@@ -26,6 +26,10 @@ body {
   margin: 0;
 }
 
+body {
+  font-family: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
