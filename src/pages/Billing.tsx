@@ -26,7 +26,7 @@ export default function Billing() {
     setLoading(true);
     
     try {
-      const res = await axios.get(`http://localhost:3000/billing/${engagementId}/invoice`);
+      const res = await axios.get(`https://pk-audit-frontend.onrender.com/billing/${engagementId}/invoice`);
       const data: Invoice = res.data;
       
       setInvoiceData(data);

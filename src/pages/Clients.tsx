@@ -28,7 +28,8 @@ export default function Clients() {
 
   const loadClients = async () => {
     try {
-      const res = await axios.get('http://localhost:3000/clients');
+      //const res = await axios.get(`${import.meta.env.VITE_API_URL}/clients`);
+      const res = await axios.get('https://pk-audit-backend.onrender.com/clients');
       setClients(res.data);
       setLoading(false);
     } catch {
@@ -43,7 +44,7 @@ export default function Clients() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:3000/clients', formData);
+      await axios.post(`${import.meta.env.VITE_API_URL}/clients`, formData);
       setShowForm(false);
       loadClients();
       setFormData({ name: '', contactPerson: '', email: '', phone: '', industry: '', notes: '' });

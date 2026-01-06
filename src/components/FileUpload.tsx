@@ -20,7 +20,7 @@ const FileUpload = () => {
     formData.append('file', file);
 
     try {
-      await axios.post('http://localhost:3000/documents/upload', formData, {
+      await axios.post('https://pk-audit-frontend.onrender.com/documents/upload', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
       alert('File uploaded successfully');

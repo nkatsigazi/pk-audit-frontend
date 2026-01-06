@@ -13,7 +13,7 @@ export default function Analytics() {
   const [data, setData] = useState<AnalyticsData>({});
 
   useEffect(() => {
-    axios.get('http://localhost:3000/analytics')
+    axios.get('https://pk-audit-frontend.onrender.com/analytics')
       .then(res => setData(res.data))
       .catch(err => console.error("Failed to fetch analytics:", err));
   }, []);

@@ -22,8 +22,8 @@ const Dashboard = () => {
     const fetchData = async () => {
       try {
         const [expensesRes, logsRes] = await Promise.all([
-          axios.get('http://localhost:3000/time-tracking/expenses'),
-          axios.get('http://localhost:3000/time-tracking/logs')
+          axios.get('https://pk-audit-frontend.onrender.com/time-tracking/expenses'),
+          axios.get('https://pk-audit-frontend.onrender.com/time-tracking/logs')
         ]);
         setExpenses(expensesRes.data);
         setTimeLogs(logsRes.data);

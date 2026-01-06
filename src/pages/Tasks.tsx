@@ -14,7 +14,7 @@ export default function Tasks() {
   const [newTask, setNewTask] = useState<string>('');
 
   useEffect(() => {
-    axios.get<Task[]>('http://localhost:3000/tasks')
+    axios.get<Task[]>('https://pk-audit-frontend.onrender.com/tasks')
       .then(res => setTasks(res.data))
       .catch(err => console.error(err));
   }, []);
@@ -23,7 +23,7 @@ export default function Tasks() {
     if (!newTask.trim()) return;
     try {
       // 3. Axios can also take a generic type for the response data
-      const res = await axios.post<Task>('http://localhost:3000/tasks', { description: newTask });
+      const res = await axios.post<Task>('https://pk-audit-frontend.onrender.com/tasks', { description: newTask });
       setTasks([...tasks, res.data]);
       setNewTask('');
     } catch (err) {
@@ -34,7 +34,7 @@ export default function Tasks() {
   // 4. Annotate parameters to avoid 'any' implicit errors
   const toggleComplete = async (id: number, completed: boolean) => {
     try {
-      await axios.patch(`http://localhost:3000/tasks/${id}`, { completed: !completed });
+      await axios.patch(`https://pk-audit-frontend.onrender.com/tasks/${id}`, { completed: !completed });
       setTasks(tasks.map(t => t.id === id ? { ...t, completed: !completed } : t));
     } catch (err) {
       console.error(err);

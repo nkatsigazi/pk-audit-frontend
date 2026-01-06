@@ -87,7 +87,7 @@ export default function TrialBalanceImport() {
     if (!previewData.length) return;
     setUploading(true);
     try {
-      await axios.post(`http://localhost:3000/engagements/${engagementId}/trial-balance/upload`, {
+      await axios.post(`https://pk-audit-frontend.onrender.com/engagements/${engagementId}/trial-balance/upload`, {
         rows: previewData,
       });
       alert('Trial balance uploaded and saved to database!');

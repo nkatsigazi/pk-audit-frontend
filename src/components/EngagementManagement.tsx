@@ -20,7 +20,7 @@ const EngagementManagement = () => {
   const [selectedClient, setSelectedClient] = useState<string | number | null>(null);
 
   useEffect(() => {
-    axios.get('http://localhost:3000/clients')
+    axios.get(`${import.meta.env.VITE_API_URL}/clients`)
       .then((res) => setClients(res.data))
       .catch(err => console.error("Error fetching clients:", err));
   }, []);
@@ -35,7 +35,7 @@ const EngagementManagement = () => {
     }
     
     setSelectedClient(clientId);
-    axios.get(`http://localhost:3000/engagements?client=${clientId}`)
+    axios.get(`https://pk-audit-frontend.onrender.com/engagements?client=${clientId}`)
       .then((res) => setEngagements(res.data))
       .catch(err => console.error("Error fetching engagements:", err));
   };

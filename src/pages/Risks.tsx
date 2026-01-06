@@ -22,14 +22,14 @@ export default function Risks() {
 
   useEffect(() => {
     // 4. Tell Axios what kind of data to expect
-    axios.get<Risk[]>('http://localhost:3000/risks')
+    axios.get<Risk[]>('https://pk-audit-frontend.onrender.com/risks')
       .then(res => setRisks(res.data))
       .catch(err => console.error(err));
   }, []);
 
   const addRisk = async () => {
     try {
-      const res = await axios.post<Risk>('http://localhost:3000/risks', newRisk);
+      const res = await axios.post<Risk>('https://pk-audit-frontend.onrender.com/risks', newRisk);
       setRisks([...risks, res.data]);
       setNewRisk({ description: '', severity: 'Low', mitigation: '' });
     } catch (err) {

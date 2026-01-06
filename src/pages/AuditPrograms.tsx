@@ -14,7 +14,7 @@ export default function AuditPrograms() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get('http://localhost:3000/audit-programs')
+    axios.get('https://pk-audit-frontend.onrender.com/audit-programs')
       .then(res => {
         setPrograms(res.data);
         setLoading(false);
