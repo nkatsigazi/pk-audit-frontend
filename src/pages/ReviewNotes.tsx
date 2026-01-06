@@ -21,12 +21,12 @@ export default function ReviewNotes() {
   const loadAllNotes = async () => {
     try {
       // Get all engagements
-      const engRes = await axios.get('https://pk-audit-frontend.onrender.com/engagements');
+      const engRes = await axios.get(`${import.meta.env.VITE_API_URL}/engagements`);
       const engagements = engRes.data;
 
       // Get review notes for each engagement
       const notesPromises = engagements.map((eng: any) =>
-        axios.get(`https://pk-audit-frontend.onrender.com/engagements/${eng.id}/review-notes`)
+        axios.get(`${import.meta.env.VITE_API_URL}/engagements/${eng.id}/review-notes`)
           .then(res => res.data.map((note: any) => ({
             ...note,
             engagement: {

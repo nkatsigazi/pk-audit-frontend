@@ -13,7 +13,7 @@ export default function Analytics() {
   const [data, setData] = useState<AnalyticsData>({});
 
   useEffect(() => {
-    axios.get('https://pk-audit-frontend.onrender.com/analytics')
+    axios.get(`${import.meta.env.VITE_API_URL}/analytics`)
       .then(res => setData(res.data))
       .catch(err => console.error("Failed to fetch analytics:", err));
   }, []);

@@ -16,7 +16,7 @@ export default function Dashboard() {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const res = await axios.get('https://pk-audit-frontend.onrender.com/engagements');
+        const res = await axios.get('${import.meta.env.VITE_API_URL}/engagements');
         const engagements: Engagement[] = res.data;
 
         // For demo, we calculate real numbers from engagements
@@ -26,7 +26,7 @@ export default function Dashboard() {
 
         // Working papers = total checklist items across all engagements
         const wpPromises = engagements.map(eng => 
-          axios.get(`https://pk-audit-frontend.onrender.com/engagements/${eng.id}/checklist`)
+          axios.get(`${import.meta.env.VITE_API_URL}/engagements/${eng.id}/checklist`)
         );
         const wpResponses = await Promise.all(wpPromises);
         const totalWP = wpResponses.reduce((sum, r) => sum + r.data.length, 0);

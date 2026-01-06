@@ -13,7 +13,7 @@ export default function Users() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get('https://pk-audit-frontend.onrender.com/users')
+    axios.get(`${import.meta.env.VITE_API_URL}/users`)
       .then(res => {
         setUsers(res.data);
         setLoading(false);

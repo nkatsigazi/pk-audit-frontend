@@ -29,7 +29,7 @@ export default function Clients() {
   const loadClients = async () => {
     try {
       //const res = await axios.get(`${import.meta.env.VITE_API_URL}/clients`);
-      const res = await axios.get('https://pk-audit-backend.onrender.com/clients');
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/clients`);
       setClients(res.data);
       setLoading(false);
     } catch {

@@ -26,8 +26,8 @@ export default function Engagements() {
   const loadData = async () => {
     try {
       const [engRes, clientRes] = await Promise.all([
-        axios.get('https://pk-audit-frontend.onrender.com/engagements'),
-        axios.get('https://pk-audit-frontend.onrender.com/clients'),
+        axios.get(`${import.meta.env.VITE_API_URL}/engagements`),
+        axios.get(`${import.meta.env.VITE_API_URL}/clients`),
       ]);
       setEngagements(engRes.data);
       setClients(clientRes.data);
@@ -76,9 +76,9 @@ export default function Engagements() {
 
     try {
       if (editingEngagement) {
-        await axios.patch(`https://pk-audit-frontend.onrender.com/engagements/${editingEngagement.id}`, payload);
+        await axios.patch(`${import.meta.env.VITE_API_URL}/engagements/${editingEngagement.id}`, payload);
       } else {
-        await axios.post('https://pk-audit-frontend.onrender.com/engagements', payload);
+        await axios.post(`${import.meta.env.VITE_API_URL}/engagements`, payload);
       }
       setShowModal(false);
       loadData();
@@ -89,7 +89,7 @@ export default function Engagements() {
 
   const updateStatus = async (id: number, newStatus: string) => {
     try {
-      await axios.patch(`https://pk-audit-frontend.onrender.com/engagements/${id}/status`, { status: newStatus });
+      await axios.patch(`${import.meta.env.VITE_API_URL}/engagements/${id}/status`, { status: newStatus });
       loadData();
     } catch {
       alert('Not allowed or error updating status');

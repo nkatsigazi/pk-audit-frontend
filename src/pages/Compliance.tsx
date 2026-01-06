@@ -14,7 +14,7 @@ export default function Compliance() {
   const [newItem, setNewItem] = useState('');
 
   useEffect(() => {
-    axios.get('https://pk-audit-frontend.onrender.com/compliance')
+    axios.get(`${import.meta.env.VITE_API_URL}/compliance`)
       .then(res => {
         // Axios data is 'any' by default, so we cast it or let TS infer from setChecklists
         setChecklists(res.data);
@@ -26,7 +26,7 @@ export default function Compliance() {
     if (!newItem.trim()) return; // Prevent adding empty names
 
     try {
-      const res = await axios.post('https://pk-audit-frontend.onrender.com/compliance', { 
+      const res = await axios.post(`${import.meta.env.VITE_API_URL}/compliance`, { 
         name: newItem, 
         items: [] 
       });

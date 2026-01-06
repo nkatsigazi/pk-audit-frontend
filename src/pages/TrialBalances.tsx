@@ -19,13 +19,13 @@ export default function TrialBalances() {
   useEffect(() => {
     const loadData = async () => {
       try {
-        const engRes = await axios.get('https://pk-audit-frontend.onrender.com/engagements');
+        const engRes = await axios.get(`${import.meta.env.VITE_API_URL}/engagements`)
         const allEngagements = engRes.data;
 
         const summaries = await Promise.all(
           allEngagements.map(async (eng: any) => {
             try {
-              const tbRes = await axios.get(`https://pk-audit-frontend.onrender.com/engagements/${eng.id}/trial-balance`);
+              const tbRes = await axios.get(`${import.meta.env.VITE_API_URL}/engagements/${eng.id}/trial-balance`);
               return {
                 id: eng.id,
                 clientName: eng.clientName,

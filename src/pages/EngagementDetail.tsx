@@ -67,9 +67,9 @@ export default function EngagementDetail() {
     if (!id) return;
     try {
       const [engRes, checklistRes, reviewRes] = await Promise.all([
-        axios.get(`https://pk-audit-frontend.onrender.com/engagements/${id}`),
-        axios.get(`https://pk-audit-frontend.onrender.com/engagements/${id}/checklist`),
-        axios.get(`https://pk-audit-frontend.onrender.com/engagements/${id}/review-notes`),
+        axios.get(`${import.meta.env.VITE_API_URL}/engagements/${id}`),
+        axios.get(`${import.meta.env.VITE_API_URL}/engagements/${id}/checklist`),
+        axios.get(`${import.meta.env.VITE_API_URL}/engagements/${id}/review-notes`),
       ]);
       setEngagement(engRes.data);
       setChecklistItems(checklistRes.data || []);
@@ -93,24 +93,24 @@ export default function EngagementDetail() {
 
   useEffect(() => {
     if (id) {
-      axios.get(`https://pk-audit-frontend.onrender.com/engagements/${id}/tasks`).then(res => setTasks(res.data));
-      axios.get(`https://pk-audit-frontend.onrender.com/engagements/${id}/risks`).then(res => setRisks(res.data));
+      axios.get(`${import.meta.env.VITE_API_URL}/engagements/${id}/tasks`).then(res => setTasks(res.data));
+      axios.get(`${import.meta.env.VITE_API_URL}/engagements/${id}/risks`).then(res => setRisks(res.data));
     }
   }, [id]);
 
   // Fixed TS7006: Added types to parameters
   const logTime = async (hours: number) => {
-    await axios.post(`https://pk-audit-frontend.onrender.com/engagements/${id}/time`, { hours });
+    await axios.post(`${import.meta.env.VITE_API_URL}/engagements/${id}/time`, { hours });
   };
 
   const submitFeedback = async (feedback: string) => {
-    await axios.post(`https://pk-audit-frontend.onrender.com/engagements/${id}/feedback`, { feedback });
+    await axios.post(`${import.meta.env.VITE_API_URL}/engagements/${id}/feedback`, { feedback });
   };
 
   const addChecklistItem = async () => {
     if (!newDescription.trim() || !id) return;
     try {
-      const res = await axios.post(`https://pk-audit-frontend.onrender.com/engagements/${id}/checklist`, {
+      const res = await axios.post(`${import.meta.env.VITE_API_URL}/engagements/${id}/checklist`, {
         description: newDescription.trim(),
         section: activeTab,
         checked: false,
@@ -129,7 +129,7 @@ export default function EngagementDetail() {
     if (!item || !id) return;
     const updated = { ...item, checked: !item.checked };
     try {
-      await axios.patch(`https://pk-audit-frontend.onrender.com/engagements/${id}/checklist/${itemId}`, updated);
+      await axios.patch(`${import.meta.env.VITE_API_URL}/engagements/${id}/checklist/${itemId}`, updated);
       setChecklistItems(checklistItems.map((i) => (i.id === itemId ? updated : i)));
     } catch (err) {
       alert('Error updating check');
@@ -139,7 +139,7 @@ export default function EngagementDetail() {
   const updateNotes = async (itemId: number, notes: string) => {
     if (!id) return;
     try {
-      await axios.patch(`https://pk-audit-frontend.onrender.com/engagements/${id}/checklist/${itemId}`, { notes });
+      await axios.patch(`${import.meta.env.VITE_API_URL}/engagements/${id}/checklist/${itemId}`, { notes });
       setChecklistItems(checklistItems.map((i) => (i.id === itemId ? { ...i, notes } : i)));
     } catch (err) {
       alert('Error updating notes');
@@ -156,7 +156,7 @@ export default function EngagementDetail() {
       if (!item) return;
       const updatedFiles = [...(item.attachedFiles || []), newFile];
       try {
-        await axios.patch(`https://pk-audit-frontend.onrender.com/engagements/${id}/checklist/${itemId}`, {
+        await axios.patch(`${import.meta.env.VITE_API_URL}/engagements/${id}/checklist/${itemId}`, {
           attachedFiles: updatedFiles,
         });
         setChecklistItems(checklistItems.map((i) =>
@@ -172,7 +172,7 @@ export default function EngagementDetail() {
   const addReviewNote = async () => {
     if (!newReviewNote.trim() || !id) return;
     try {
-      const res = await axios.post(`https://pk-audit-frontend.onrender.com/engagements/${id}/review-notes`, {
+      const res = await axios.post(`${import.meta.env.VITE_API_URL}/engagements/${id}/review-notes`, {
         note: newReviewNote.trim(),
         createdBy: 'Manager',
         status: 'Open',
@@ -187,7 +187,7 @@ export default function EngagementDetail() {
   const updateReviewNoteStatus = async (noteId: number, status: 'Open' | 'Resolved') => {
     if (!id) return;
     try {
-      await axios.patch(`https://pk-audit-frontend.onrender.com/engagements/${id}/review-notes/${noteId}`, { status });
+      await axios.patch(`${import.meta.env.VITE_API_URL}/engagements/${id}/review-notes/${noteId}`, { status });
       setReviewNotes(reviewNotes.map((n) => (n.id === noteId ? { ...n, status } : n)));
     } catch (err) {
       alert('Error updating note status');
